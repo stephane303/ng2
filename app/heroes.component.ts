@@ -14,6 +14,7 @@ import {Router} from 'angular2/router';
 export class HeroesComponent implements OnInit {
 	heroes: Hero[];
 	selectedHero: Hero;
+    errorMessage : String;
 	constructor(
 		private _router: Router,
 		private _heroService: HeroService) { }

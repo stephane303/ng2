@@ -14,11 +14,12 @@ export class HeroDetailComponent {
 		private _routeParams: RouteParams) {
 	}	
 	hero: Hero;
+    errorMessage:String;
 	ngOnInit() {
 		let id = +this._routeParams.get('id');
 		this._heroService.getHeroes()
                      .subscribe(
-                       heroes => this.heroes = heroes,
+            heroes => this.hero = heroes.find(myObj => myObj.id == id),
                        error =>  this.errorMessage = <any>error);
 			
 	}

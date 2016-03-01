@@ -33,7 +33,7 @@ System.register(['angular2/router', './hero.service', 'angular2/core'], function
                     var _this = this;
                     var id = +this._routeParams.get('id');
                     this._heroService.getHeroes()
-                        .subscribe(function (heroes) { return _this.heroes = heroes; }, function (error) { return _this.errorMessage = error; });
+                        .subscribe(function (heroes) { return _this.hero = heroes.find(function (myObj) { return myObj.id == id; }); }, function (error) { return _this.errorMessage = error; });
                 };
                 HeroDetailComponent.prototype.goBack = function () {
                     window.history.back();

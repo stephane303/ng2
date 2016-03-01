@@ -33,10 +33,11 @@ System.register(['angular2/core', 'angular2/router', './hero.service'], function
                 DashboardComponent.prototype.ngOnInit = function () {
                     var _this = this;
                     this._heroService.getHeroes()
-                        .subscribe(function (heroes) { return _this.heroes = heroes.slice(1, 5); }, function (error) { return _this.errorMessage = error; });
+                        .subscribe(function (heroes) { return _this.heroes = heroes.slice(0, 4); }, function (error) { return _this.errorMessage = error; });
                 };
                 DashboardComponent.prototype.gotoDetail = function (hero) {
                     var link = ['HeroDetail', { id: hero.id }];
+                    console.log(hero.id);
                     this._router.navigate(link);
                 };
                 DashboardComponent = __decorate([

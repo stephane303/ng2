@@ -25,7 +25,6 @@ import 'rxjs/Rx';
     HeroService,
     HTTP_PROVIDERS
   ]    
-  ]
 })
 @RouteConfig([
   {
@@ -46,4 +45,6 @@ import 'rxjs/Rx';
   },
 ])
 export class AppComponent {
-  title = 'Tour of Heroes';}
+  title = 'Tour of Heroes';
+  
+}
