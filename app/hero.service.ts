@@ -8,11 +8,11 @@ import {Observable}     from 'rxjs/Observable';
 export class HeroService {
   constructor (private http: Http) {}
 
-  private _heroesUrl = 'app/heroes.json';  // URL to web api
+  private _heroesUrl = 'http://localhost/apigility/public/album1';  // URL to web api
 
   getHeroes () {
     return this.http.get(this._heroesUrl)
-                    .map(res => <Hero[]> res.json().data)
+                    .map(res => <Hero[]> res.json()._embedded.album1)
                     .catch(this.handleError);
   }
   private handleError (error: Response) {

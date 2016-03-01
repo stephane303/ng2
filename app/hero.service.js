@@ -27,11 +27,11 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
             HeroService = (function () {
                 function HeroService(http) {
                     this.http = http;
-                    this._heroesUrl = 'app/heroes.json'; // URL to web api
+                    this._heroesUrl = 'http://localhost/apigility/public/album1'; // URL to web api
                 }
                 HeroService.prototype.getHeroes = function () {
                     return this.http.get(this._heroesUrl)
-                        .map(function (res) { return res.json().data; })
+                        .map(function (res) { return res.json()._embedded.album1; })
                         .catch(this.handleError);
                 };
                 HeroService.prototype.handleError = function (error) {
