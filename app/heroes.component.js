@@ -34,7 +34,8 @@ System.register(['angular2/core', './hero-detail.component', './hero.service', '
                 }
                 HeroesComponent.prototype.getHeroes = function () {
                     var _this = this;
-                    this._heroService.getHeroes().then(function (heroes) { return _this.heroes = heroes; });
+                    this._heroService.getHeroes()
+                        .subscribe(function (heroes) { return _this.heroes = heroes; }, function (error) { return _this.errorMessage = error; });
                 };
                 HeroesComponent.prototype.ngOnInit = function () {
                     this.getHeroes();

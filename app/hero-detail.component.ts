@@ -16,8 +16,11 @@ export class HeroDetailComponent {
 	hero: Hero;
 	ngOnInit() {
 		let id = +this._routeParams.get('id');
-		this._heroService.getHero(id)
-			.then(hero => this.hero = hero);
+		this._heroService.getHeroes()
+                     .subscribe(
+                       heroes => this.heroes = heroes,
+                       error =>  this.errorMessage = <any>error);
+			
 	}
 	goBack() {
 		window.history.back();

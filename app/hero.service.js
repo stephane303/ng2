@@ -1,4 +1,4 @@
-System.register(['./mock-heroes', 'angular2/core'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/http'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,29 +10,36 @@ System.register(['./mock-heroes', 'angular2/core'], function(exports_1, context_
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var mock_heroes_1, core_1;
+    var core_1, http_1;
     var HeroService;
     return {
         setters:[
-            function (mock_heroes_1_1) {
-                mock_heroes_1 = mock_heroes_1_1;
-            },
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (http_1_1) {
+                http_1 = http_1_1;
             }],
         execute: function() {
             HeroService = (function () {
-                function HeroService() {
+                function HeroService(http) {
+                    this.http = http;
+                    this._heroesUrl = 'app/heroes.json'; // URL to web api
                 }
                 HeroService.prototype.getHeroes = function () {
-                    return Promise.resolve(mock_heroes_1.HEROES);
+                    return this.http.get(this._heroesUrl)
+                        .map(function (res) { return res.json().data; })
+                        .catch(this.handleError);
                 };
-                HeroService.prototype.getHero = function (id) {
-                    return Promise.resolve(mock_heroes_1.HEROES).then(function (heroes) { return heroes.filter(function (hero) { return hero.id === id; })[0]; });
+                HeroService.prototype.handleError = function (error) {
+                    // in a real world app, we may send the error to some remote logging infrastructure
+                    // instead of just logging it to the console
+                    console.error(error);
+                    return Observable.throw(error.json().error || 'Server error');
                 };
                 HeroService = __decorate([
                     core_1.Injectable(), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [http_1.Http])
                 ], HeroService);
                 return HeroService;
             }());

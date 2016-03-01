@@ -32,8 +32,8 @@ System.register(['angular2/router', './hero.service', 'angular2/core'], function
                 HeroDetailComponent.prototype.ngOnInit = function () {
                     var _this = this;
                     var id = +this._routeParams.get('id');
-                    this._heroService.getHero(id)
-                        .then(function (hero) { return _this.hero = hero; });
+                    this._heroService.getHeroes()
+                        .subscribe(function (heroes) { return _this.heroes = heroes; }, function (error) { return _this.errorMessage = error; });
                 };
                 HeroDetailComponent.prototype.goBack = function () {
                     window.history.back();
